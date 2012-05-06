@@ -66,23 +66,23 @@ public class RegistroPedidos {
 		shell.setText("Registro de Pedidos");
 
 		Label lblNroPedido = new Label(shell, SWT.NONE);
-		lblNroPedido.setBounds(44, 25, 68, 13);
+		lblNroPedido.setBounds(44, 25, 68, 26);
 		lblNroPedido.setText("Nro. Pedido");
 
 		text = new Text(shell, SWT.BORDER | SWT.RIGHT);
-		text.setBounds(118, 22, 92, 19);
+		text.setBounds(118, 22, 92, 29);
 		text.setEditable(false);
 
 		Label lblData = new Label(shell, SWT.NONE);
 		lblData.setText("Data");
-		lblData.setBounds(254, 25, 68, 13);
+		lblData.setBounds(254, 25, 68, 21);
 
 		final DateTime dateTime = new DateTime(shell, SWT.DATE);
-		dateTime.setBounds(328, 17, 92, 21);
+		dateTime.setBounds(306, 25, 104, 21);
 
 		Label lblTipoCliente = new Label(shell, SWT.NONE);
 		lblTipoCliente.setText("Tipo Cliente");
-		lblTipoCliente.setBounds(44, 69, 68, 13);
+		lblTipoCliente.setBounds(44, 69, 68, 26);
 
 		final Combo combo = new Combo(shell, SWT.NONE);
 		combo.setBounds(117, 66, 93, 21);
@@ -91,14 +91,14 @@ public class RegistroPedidos {
 
 		Label lblCliente = new Label(shell, SWT.NONE);
 		lblCliente.setText("Cliente");
-		lblCliente.setBounds(44, 110, 68, 13);
+		lblCliente.setBounds(44, 110, 68, 26);
 
 		final Combo combo_1 = new Combo(shell, SWT.NONE);
 		combo_1.setBounds(118, 107, 421, 21);
 
 		Label lblProduto = new Label(shell, SWT.NONE);
 		lblProduto.setText("Produto");
-		lblProduto.setBounds(44, 157, 68, 13);
+		lblProduto.setBounds(44, 157, 68, 21);
 
 		final Combo combo_2 = new Combo(shell, SWT.NONE);
 		combo_2.setBounds(118, 149, 421, 21);
@@ -151,14 +151,14 @@ public class RegistroPedidos {
 
 		Label lblQuantidade = new Label(shell, SWT.NONE);
 		lblQuantidade.setText("Quantidade");
-		lblQuantidade.setBounds(545, 157, 63, 13);
+		lblQuantidade.setBounds(545, 157, 79, 21);
 
 		text_1 = new Text(shell, SWT.BORDER | SWT.RIGHT);
 		text_1.setText("1");
-		text_1.setBounds(607, 154, 63, 19);
+		text_1.setBounds(626, 157, 63, 19);
 
 		Button btnAdicionarProduto = new Button(shell, SWT.NONE);
-		btnAdicionarProduto.setBounds(44, 190, 120, 23);
+		btnAdicionarProduto.setBounds(44, 190, 136, 23);
 		btnAdicionarProduto.setText("Adicionar produto");
 
 		btnAdicionarProduto.addSelectionListener(new SelectionListener() {
@@ -181,7 +181,7 @@ public class RegistroPedidos {
 
 		txtR = new Text(shell, SWT.BORDER | SWT.RIGHT);
 
-		txtR.setBounds(517, 194, 153, 19);
+		txtR.setBounds(526, 194, 153, 19);
 
 		Button btnNewButton = new Button(shell, SWT.NONE);
 		btnNewButton.setBounds(545, 444, 134, 23);
@@ -205,7 +205,7 @@ public class RegistroPedidos {
 
 		Button btnCheckButton = new Button(shell, SWT.CHECK);
 		btnCheckButton.setSelection(false);
-		btnCheckButton.setBounds(44, 447, 85, 16);
+		btnCheckButton.setBounds(44, 447, 104, 16);
 		btnCheckButton.setText("Finalizado");
 
 		btnCheckButton.addSelectionListener(new SelectionListener() {
@@ -235,7 +235,7 @@ public class RegistroPedidos {
 
 		Label lblTotalGeral = new Label(shell, SWT.NONE);
 		lblTotalGeral.setText("TOTAL GERAL");
-		lblTotalGeral.setBounds(449, 200, 68, 13);
+		lblTotalGeral.setBounds(429, 194, 91, 19);
 
 	}
 
