@@ -32,7 +32,7 @@ public class RegistroPedidos {
 	private JFrame frame;
 	private Text text;
 	private Table table;
-	private Text text_1;
+	private Text txt_qtd;
 	public Text txtR;
 	private char tipo;
 	private Double total;
@@ -116,10 +116,6 @@ public class RegistroPedidos {
 			combo_2.add(produtos.get(key),Integer.parseInt(key.toString()));
 		}
 
-		System.out.println();
-
-		// combo_2.add("teste produto");
-
 		table = new Table(shell, SWT.BORDER | SWT.CHECK | SWT.FULL_SELECTION);
 		table.setBounds(44, 219, 635, 212);
 		table.setHeaderVisible(true);
@@ -153,9 +149,9 @@ public class RegistroPedidos {
 		lblQuantidade.setText("Quantidade");
 		lblQuantidade.setBounds(545, 157, 79, 21);
 
-		text_1 = new Text(shell, SWT.BORDER | SWT.RIGHT);
-		text_1.setText("1");
-		text_1.setBounds(626, 157, 63, 19);
+		txt_qtd = new Text(shell, SWT.BORDER | SWT.RIGHT);
+		txt_qtd.setText("1");
+		txt_qtd.setBounds(626, 157, 63, 19);
 
 		Button btnAdicionarProduto = new Button(shell, SWT.NONE);
 		btnAdicionarProduto.setBounds(44, 190, 136, 23);
@@ -164,22 +160,27 @@ public class RegistroPedidos {
 		btnAdicionarProduto.addSelectionListener(new SelectionListener() {
 			public void widgetSelected(SelectionEvent event) {
 				TableItem it1 = new TableItem(table, SWT.NONE);
-				int i = 0;
-				i++;
-				it1.setText(new String[] { 	Integer.toString(combo_2.getSelectionIndex()) , combo_2.getText(), "pune" });
-				//it1.setText(new String[] { );
 				
-				System.out.println("Oque ta selecionado na combo?" + combo_2.getText());
+		
+				ProdutoController p = new ProdutoController();				
+				Produto produto = p.getProduto(	combo_2.getSelectionIndex());
 				
 				
+				it1.setText(new String[] { 	Integer.toString(combo_2.getSelectionIndex()) , combo_2.getText(),
+						Double.toString(produto.getValorUnitario()),txt_qtd.getText(),"0",
+						Double.toString(Integer.parseInt(txt_qtd.getText()) * produto.getValorUnitario())});
 				
 			}
+			
+			
 
+		
 			public void widgetDefaultSelected(SelectionEvent arg0) {
 			}
 		});
 
 		txtR = new Text(shell, SWT.BORDER | SWT.RIGHT);
+		txtR.setEditable(false);
 
 		txtR.setBounds(526, 194, 153, 19);
 

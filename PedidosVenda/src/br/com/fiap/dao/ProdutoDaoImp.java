@@ -20,7 +20,7 @@ public class ProdutoDaoImp implements ProdutoDao {
 
 	@Override
 	public Produto getProduto(long id) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();		
 		return (Produto) session.load(Produto.class, id);
 	}
 
