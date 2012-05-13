@@ -70,7 +70,7 @@ public class RegistroPedidos {
 		lblNroPedido.setText("Nro. Pedido");
 
 		text = new Text(shell, SWT.BORDER | SWT.RIGHT);
-		text.setBounds(118, 22, 92, 29);
+		text.setBounds(137, 22, 92, 29);
 		text.setEditable(false);
 
 		Label lblData = new Label(shell, SWT.NONE);
@@ -82,10 +82,10 @@ public class RegistroPedidos {
 
 		Label lblTipoCliente = new Label(shell, SWT.NONE);
 		lblTipoCliente.setText("Tipo Cliente");
-		lblTipoCliente.setBounds(44, 69, 68, 26);
+		lblTipoCliente.setBounds(44, 69, 87, 26);
 
 		final Combo combo = new Combo(shell, SWT.NONE);
-		combo.setBounds(117, 66, 93, 21);
+		combo.setBounds(137, 66, 93, 21);
 		combo.add("Fisico");
 		combo.add("Juridico");
 
@@ -94,14 +94,14 @@ public class RegistroPedidos {
 		lblCliente.setBounds(44, 110, 68, 26);
 
 		final Combo combo_1 = new Combo(shell, SWT.NONE);
-		combo_1.setBounds(118, 107, 421, 21);
+		combo_1.setBounds(137, 110, 387, 29);
 
 		Label lblProduto = new Label(shell, SWT.NONE);
 		lblProduto.setText("Produto");
 		lblProduto.setBounds(44, 157, 68, 21);
 
 		final Combo combo_2 = new Combo(shell, SWT.NONE);
-		combo_2.setBounds(118, 149, 421, 21);
+		combo_2.setBounds(137, 149, 387, 29);
 
 		// teste fernando
 		ProdutoController pc = new ProdutoController();
@@ -151,7 +151,7 @@ public class RegistroPedidos {
 
 		txt_qtd = new Text(shell, SWT.BORDER | SWT.RIGHT);
 		txt_qtd.setText("1");
-		txt_qtd.setBounds(626, 157, 63, 19);
+		txt_qtd.setBounds(630, 154, 63, 29);
 
 		Button btnAdicionarProduto = new Button(shell, SWT.NONE);
 		btnAdicionarProduto.setBounds(44, 190, 136, 23);
@@ -182,7 +182,7 @@ public class RegistroPedidos {
 		txtR = new Text(shell, SWT.BORDER | SWT.RIGHT);
 		txtR.setEditable(false);
 
-		txtR.setBounds(526, 194, 153, 19);
+		txtR.setBounds(526, 184, 150, 29);
 
 		Button btnNewButton = new Button(shell, SWT.NONE);
 		btnNewButton.setBounds(545, 444, 134, 23);

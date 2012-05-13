@@ -1,53 +1,52 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.fiap.dao;
 
-import br.com.fiap.model.Cliente;
-import br.com.fiap.util.HibernateUtil;
 import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class ClienteDaoImp implements ClienteDao {
+import br.com.fiap.model.TipoCliente;
+import br.com.fiap.util.HibernateUtil;
 
+public class TipoClienteDaoImp implements TipoClienteDao{
+	
 	@Override
-	public void save(Cliente cliente) {
+	public void save(TipoCliente tipo) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction t = session.beginTransaction();
-		session.save(cliente);
+		session.save(tipo);
 		t.commit();
 	}
 
 	@Override
-	public Cliente getCliente(long id) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		return (Cliente) session.load(Cliente.class, id);
+	public TipoCliente getTipoCliente(long id) {
+		Session session = HibernateUtil.getSessionFactory().openSession();		
+		return (TipoCliente) session.load(TipoCliente.class, id);
 	}
 
 	@Override
-	public List<Cliente> list() {
+	public List<TipoCliente> list() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction t = session.beginTransaction();
-		List lista = session.createQuery("from Cliente").list();
+		List lista = session.createQuery("from TipoCliente").list();
 		t.commit();
 		return lista;
 	}
 
 	@Override
-	public void remove(Cliente cliente) {
+	public void remove(TipoCliente tipo) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction t = session.beginTransaction();
-		session.delete(cliente);
+		session.delete(tipo);
 		t.commit();
 	}
 
 	@Override
-	public void update(Cliente cliente) {
+	public void update(TipoCliente tipo) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction t = session.beginTransaction();
-		session.update(cliente);
+		session.update(tipo);
 		t.commit();
 	}
+
 }

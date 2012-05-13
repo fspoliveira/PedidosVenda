@@ -1,5 +1,6 @@
 package br.com.fiap.model;
 
+
 public class Pedido {
 	
 	private long id;

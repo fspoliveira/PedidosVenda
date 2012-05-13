@@ -7,12 +7,9 @@ package br.com.fiap.util;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 
+import br.com.fiap.model.Cliente;
 import br.com.fiap.model.Produto;
 
-/**
- * 
- * @author fsantiago
- */
 public class HibernateUtil {
 
 	private static SessionFactory sessionFactory;
@@ -29,6 +26,7 @@ public class HibernateUtil {
 				AnnotationConfiguration ac = new AnnotationConfiguration();
 
 				ac.addAnnotatedClass(Produto.class);
+				//ac.addAnnotatedClass(Cliente.class);
 
 				sessionFactory = ac.configure().buildSessionFactory();
 

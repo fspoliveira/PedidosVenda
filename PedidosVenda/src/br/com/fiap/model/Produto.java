@@ -4,7 +4,6 @@ package br.com.fiap.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "produto")
 public class Produto implements Serializable {

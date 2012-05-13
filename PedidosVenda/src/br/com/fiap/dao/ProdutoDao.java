@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.fiap.model.Produto;
 
+
 public interface ProdutoDao {
 	
 	public void save(Produto produto);
