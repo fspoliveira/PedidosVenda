@@ -1,11 +1,7 @@
 package br.com.fiap.view;
 
-import java.awt.Window;
 import java.util.Iterator;
 import java.util.SortedMap;
-
-import javax.swing.JFrame;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -20,23 +16,24 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+
+import br.com.fiap.controller.ClienteController;
 import br.com.fiap.controller.ProdutoController;
 import br.com.fiap.controller.TipoClienteController;
 import br.com.fiap.model.Produto;
 
 public class RegistroPedidos {
 	protected Shell shell;
-	private JFrame frame;
 	private Text text;
 	private Table table;
 	private Text txt_qtd;
 	public Text txtR;
-	private char tipo;
 	private Double total;
-	private DateTime dateTime;
-	Iterator iterator;
+
+	Iterator<String> iterator;
 	private SortedMap<String, String> produtos;
 	private SortedMap<String, String> tipoCliente;
+	private SortedMap<String, String> clientes;
 
 	public static void main(String[] args) {
 		try {
@@ -86,9 +83,6 @@ public class RegistroPedidos {
 		final Combo tipoCliente_cmb = new Combo(shell, SWT.NONE);
 		tipoCliente_cmb.setBounds(137, 66, 93, 21);
 
-		// tipoCliente_cmb.add("Fisico");
-		// tipoCliente_cmb.add("Juridico");
-
 		// Adiciona os tipos de clientes do banco de dados
 		TipoClienteController tipoClienteC = new TipoClienteController();
 		tipoCliente = tipoClienteC.getTipoClientes();
@@ -105,9 +99,21 @@ public class RegistroPedidos {
 		lblCliente.setText("Cliente");
 		lblCliente.setBounds(44, 110, 68, 26);
 
-		final Combo combo_1 = new Combo(shell, SWT.NONE);
-		combo_1.setBounds(137, 110, 387, 29);
-
+		final Combo cliente_cmb = new Combo(shell, SWT.NONE);
+		cliente_cmb.setBounds(137, 110, 387, 29);
+		
+		//Adiciona clientes do banco de dados
+		ClienteController clienteC = new ClienteController();
+		clientes = clienteC.getClientes();
+		cliente_cmb.add("Selecione o cliente");
+		
+		iterator = clientes.keySet().iterator();
+		while (iterator.hasNext()) {
+			Object key = iterator.next();
+			cliente_cmb.add(clientes.get(key),
+					Integer.parseInt(key.toString()));
+		}
+		
 		Label lblProduto = new Label(shell, SWT.NONE);
 		lblProduto.setText("Produto");
 		lblProduto.setBounds(44, 157, 68, 21);
@@ -123,8 +129,7 @@ public class RegistroPedidos {
 
 		iterator = produtos.keySet().iterator();
 		while (iterator.hasNext()) {
-			Object key = iterator.next();
-			System.out.println("key : " + key + " value :" + produtos.get(key));
+			Object key = iterator.next();			
 			produto_cmb
 					.add(produtos.get(key), Integer.parseInt(key.toString()));
 		}

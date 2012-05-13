@@ -1,7 +1,9 @@
 package br.com.fiap.model;
 
+import java.io.Serializable;
 
-public class Pedido {
+
+public class Pedido implements Serializable  {
 	
 	private long id;
 	private Produto produto;
