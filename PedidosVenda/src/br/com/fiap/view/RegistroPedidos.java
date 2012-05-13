@@ -1,9 +1,6 @@
 package br.com.fiap.view;
 
-import java.awt.EventQueue;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.SortedMap;
 
 import javax.swing.JFrame;
@@ -22,9 +19,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
-import org.hibernate.mapping.Set;
-
 import br.com.fiap.controller.ProdutoController;
+import br.com.fiap.controller.TipoClienteController;
 import br.com.fiap.model.Produto;
 
 public class RegistroPedidos {
@@ -37,7 +33,9 @@ public class RegistroPedidos {
 	private char tipo;
 	private Double total;
 	private DateTime dateTime;
+	Iterator iterator;
 	private SortedMap<String, String> produtos;
+	private SortedMap<String, String> tipoCliente;
 
 	public static void main(String[] args) {
 		try {
@@ -66,7 +64,7 @@ public class RegistroPedidos {
 		shell.setText("Registro de Pedidos");
 
 		Label lblNroPedido = new Label(shell, SWT.NONE);
-		lblNroPedido.setBounds(44, 25, 68, 26);
+		lblNroPedido.setBounds(44, 25, 87, 26);
 		lblNroPedido.setText("Nro. Pedido");
 
 		text = new Text(shell, SWT.BORDER | SWT.RIGHT);
@@ -84,10 +82,22 @@ public class RegistroPedidos {
 		lblTipoCliente.setText("Tipo Cliente");
 		lblTipoCliente.setBounds(44, 69, 87, 26);
 
-		final Combo combo = new Combo(shell, SWT.NONE);
-		combo.setBounds(137, 66, 93, 21);
-		combo.add("Fisico");
-		combo.add("Juridico");
+		final Combo tipoCliente_cmb = new Combo(shell, SWT.NONE);
+		tipoCliente_cmb.setBounds(137, 66, 93, 21);
+		
+		//tipoCliente_cmb.add("Fisico");
+		//tipoCliente_cmb.add("Juridico");
+		
+		//Adiciona os tipos de clientes do banco de dados
+		TipoClienteController tipoClienteC = new TipoClienteController();
+		tipoCliente = tipoClienteC.getTipoClientes();
+		tipoCliente_cmb.add("Selecione o tipo do Cliente");
+		
+		iterator = tipoCliente.keySet().iterator();
+		while (iterator.hasNext()) {
+			Object key = iterator.next();	
+			tipoCliente_cmb.add(tipoCliente.get(key),Integer.parseInt(key.toString()));
+		}
 
 		Label lblCliente = new Label(shell, SWT.NONE);
 		lblCliente.setText("Cliente");
@@ -100,20 +110,20 @@ public class RegistroPedidos {
 		lblProduto.setText("Produto");
 		lblProduto.setBounds(44, 157, 68, 21);
 
-		final Combo combo_2 = new Combo(shell, SWT.NONE);
-		combo_2.setBounds(137, 149, 387, 29);
+		final Combo produto_cmb = new Combo(shell, SWT.NONE);
+		produto_cmb.setBounds(137, 149, 387, 29);
 
-		// teste fernando
+		// Adiciona todos produtos do Banco de Dados
 		ProdutoController pc = new ProdutoController();
 		produtos = pc.getProdutos();
 		
-		combo_2.add("Selecione o produto",0);
+		produto_cmb.add("Selecione o produto",0);
 
-		Iterator iterator = produtos.keySet().iterator();
+		iterator = produtos.keySet().iterator();
 		while (iterator.hasNext()) {
 			Object key = iterator.next();
 			System.out.println("key : " + key + " value :" + produtos.get(key));
-			combo_2.add(produtos.get(key),Integer.parseInt(key.toString()));
+			produto_cmb.add(produtos.get(key),Integer.parseInt(key.toString()));
 		}
 
 		table = new Table(shell, SWT.BORDER | SWT.CHECK | SWT.FULL_SELECTION);
@@ -163,10 +173,10 @@ public class RegistroPedidos {
 				
 		
 				ProdutoController p = new ProdutoController();				
-				Produto produto = p.getProduto(	combo_2.getSelectionIndex());
+				Produto produto = p.getProduto(	produto_cmb.getSelectionIndex());
 				
 				
-				it1.setText(new String[] { 	Integer.toString(combo_2.getSelectionIndex()) , combo_2.getText(),
+				it1.setText(new String[] { 	Integer.toString(produto_cmb.getSelectionIndex()) , produto_cmb.getText(),
 						Double.toString(produto.getValorUnitario()),txt_qtd.getText(),"0",
 						Double.toString(Integer.parseInt(txt_qtd.getText()) * produto.getValorUnitario())});
 				
