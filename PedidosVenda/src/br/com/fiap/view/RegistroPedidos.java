@@ -1,5 +1,6 @@
 package br.com.fiap.view;
 
+import java.awt.Window;
 import java.util.Iterator;
 import java.util.SortedMap;
 
@@ -84,19 +85,20 @@ public class RegistroPedidos {
 
 		final Combo tipoCliente_cmb = new Combo(shell, SWT.NONE);
 		tipoCliente_cmb.setBounds(137, 66, 93, 21);
-		
-		//tipoCliente_cmb.add("Fisico");
-		//tipoCliente_cmb.add("Juridico");
-		
-		//Adiciona os tipos de clientes do banco de dados
+
+		// tipoCliente_cmb.add("Fisico");
+		// tipoCliente_cmb.add("Juridico");
+
+		// Adiciona os tipos de clientes do banco de dados
 		TipoClienteController tipoClienteC = new TipoClienteController();
 		tipoCliente = tipoClienteC.getTipoClientes();
 		tipoCliente_cmb.add("Selecione o tipo do Cliente");
-		
+
 		iterator = tipoCliente.keySet().iterator();
 		while (iterator.hasNext()) {
-			Object key = iterator.next();	
-			tipoCliente_cmb.add(tipoCliente.get(key),Integer.parseInt(key.toString()));
+			Object key = iterator.next();
+			tipoCliente_cmb.add(tipoCliente.get(key),
+					Integer.parseInt(key.toString()));
 		}
 
 		Label lblCliente = new Label(shell, SWT.NONE);
@@ -116,14 +118,15 @@ public class RegistroPedidos {
 		// Adiciona todos produtos do Banco de Dados
 		ProdutoController pc = new ProdutoController();
 		produtos = pc.getProdutos();
-		
-		produto_cmb.add("Selecione o produto",0);
+
+		produto_cmb.add("Selecione o produto", 0);
 
 		iterator = produtos.keySet().iterator();
 		while (iterator.hasNext()) {
 			Object key = iterator.next();
 			System.out.println("key : " + key + " value :" + produtos.get(key));
-			produto_cmb.add(produtos.get(key),Integer.parseInt(key.toString()));
+			produto_cmb
+					.add(produtos.get(key), Integer.parseInt(key.toString()));
 		}
 
 		table = new Table(shell, SWT.BORDER | SWT.CHECK | SWT.FULL_SELECTION);
@@ -170,22 +173,25 @@ public class RegistroPedidos {
 		btnAdicionarProduto.addSelectionListener(new SelectionListener() {
 			public void widgetSelected(SelectionEvent event) {
 				TableItem it1 = new TableItem(table, SWT.NONE);
-				
-		
-				ProdutoController p = new ProdutoController();				
-				Produto produto = p.getProduto(	produto_cmb.getSelectionIndex());
-				
-				
-				it1.setText(new String[] { 	Integer.toString(produto_cmb.getSelectionIndex()) , produto_cmb.getText(),
-						Double.toString(produto.getValorUnitario()),txt_qtd.getText(),"0",
-						Double.toString(Integer.parseInt(txt_qtd.getText()) * produto.getValorUnitario())});
-				
-			}
-			
-			
 
-		
+				ProdutoController p = new ProdutoController();
+				Produto produto = p.getProduto(produto_cmb.getSelectionIndex());
+
+				it1.setText(new String[] {
+						Integer.toString(produto_cmb.getSelectionIndex()),
+						produto_cmb.getText(),
+						Double.toString(produto.getValorUnitario()),
+						txt_qtd.getText(),
+						"0",
+						Double.toString(Integer.parseInt(txt_qtd.getText())
+								* produto.getValorUnitario()) });
+
+				getGrid();
+				calculaTotal(total);
+			}
+
 			public void widgetDefaultSelected(SelectionEvent arg0) {
+
 			}
 		});
 
@@ -193,26 +199,6 @@ public class RegistroPedidos {
 		txtR.setEditable(false);
 
 		txtR.setBounds(526, 184, 150, 29);
-
-		Button btnNewButton = new Button(shell, SWT.NONE);
-		btnNewButton.setBounds(545, 444, 134, 23);
-		btnNewButton.setText("Atualizar Total");
-
-		btnNewButton.addSelectionListener(new SelectionListener() {
-			public void widgetSelected(SelectionEvent event) {
-				System.out.println("aqui");
-				total = 0.00;
-				TableItem[] selection = table.getItems();
-				for (int i = 0; i < selection.length; i++) {
-					total = total + Double.parseDouble(selection[i].getText(5));
-				}
-				total = calculaTotal(total);
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent event) {
-			}
-		});
 
 		Button btnCheckButton = new Button(shell, SWT.CHECK);
 		btnCheckButton.setSelection(false);
@@ -266,5 +252,16 @@ public class RegistroPedidos {
 	}
 
 	public void finalizado() {
+	}
+
+	public void getGrid() {
+
+		total = 0.00;
+		TableItem[] selection = table.getItems();
+		for (int i = 0; i < selection.length; i++) {
+			total = total + Double.parseDouble(selection[i].getText(5));
+		}
+		total = calculaTotal(total);
+
 	}
 }

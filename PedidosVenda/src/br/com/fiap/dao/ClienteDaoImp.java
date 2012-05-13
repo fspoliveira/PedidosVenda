@@ -29,7 +29,7 @@ public class ClienteDaoImp implements ClienteDao {
 	@Override
 	public List<Cliente> list() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Transaction t = session.beginTransaction();
+		Transaction t = session.beginTransaction();		
 		List lista = session.createQuery("from Cliente").list();
 		t.commit();
 		return lista;

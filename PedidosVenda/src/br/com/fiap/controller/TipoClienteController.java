@@ -3,9 +3,7 @@ package br.com.fiap.controller;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import br.com.fiap.dao.ProdutoDaoImp;
 import br.com.fiap.dao.TipoClienteDaoImp;
-import br.com.fiap.model.Produto;
 import br.com.fiap.model.TipoCliente;
 
 public class TipoClienteController {
