@@ -2,15 +2,14 @@ package br.com.fiap.model;
 
 
 import java.io.Serializable;
+import java.util.Collection;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "produto")
 public class Produto implements Serializable {
-	 
-    /**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,6 +22,9 @@ public class Produto implements Serializable {
     
     @Column(name = "valorUnitarioProduto")
 	private double valorUnitario;
+    
+    @OneToMany(mappedBy = "idProduto", cascade=CascadeType.ALL)
+	private Collection<Venda> vendas;
 
 	public long getId() {
 		return id;
@@ -47,5 +49,14 @@ public class Produto implements Serializable {
 	public void setValorUnitario(double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
+
+	public Collection<Venda> getVendas() {
+		return vendas;
+	}
+
+	public void setVendas(Collection<Venda> vendas) {
+		this.vendas = vendas;
+	}
+	
 
 }

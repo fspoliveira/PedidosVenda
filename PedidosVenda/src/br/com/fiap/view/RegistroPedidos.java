@@ -205,10 +205,11 @@ public class RegistroPedidos {
 		txtR.setBounds(526, 184, 150, 29);
 		txtR.setEditable(false);
 
-		Button btnCheckButton = new Button(shell, SWT.CHECK);
-		btnCheckButton.setBounds(44, 447, 104, 16);
+		final Button btnCheckButton = new Button(shell, SWT.NONE);
+		btnCheckButton.setBounds(44, 447, 120, 26);
 		btnCheckButton.setSelection(false);
-		btnCheckButton.setText("Finalizado");
+		btnCheckButton.setText("Finalizar Pedido");
+		
 
 		btnCheckButton.addSelectionListener(new SelectionListener() {
 			public void widgetSelected(SelectionEvent arg0) {
@@ -224,10 +225,11 @@ public class RegistroPedidos {
 				switch (buttonID) {
 
 				case SWT.YES:
-					
+					System.exit(0);
 
 				case SWT.NO:
-					//System.exit(0);
+					
+					btnCheckButton.setSelection(false);
 					
 				}
 			}

@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 import br.com.fiap.model.Cliente;
 import br.com.fiap.model.Produto;
 import br.com.fiap.model.TipoCliente;
+import br.com.fiap.model.Venda;
 
 public class HibernateUtil {
 
@@ -29,6 +30,7 @@ public class HibernateUtil {
 				ac.addAnnotatedClass(Produto.class);
 				ac.addAnnotatedClass(TipoCliente.class);
 				ac.addAnnotatedClass(Cliente.class);
+				ac.addAnnotatedClass(Venda.class);
 
 				sessionFactory = ac.configure().buildSessionFactory();
 
