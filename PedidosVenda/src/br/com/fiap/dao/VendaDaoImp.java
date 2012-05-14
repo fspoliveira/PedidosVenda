@@ -48,5 +48,14 @@ public class VendaDaoImp implements VendaDao {
 		session.update(venda);
 		t.commit();
 	}
+	
+	public Integer getMaxPedidoVenda(){
+		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Integer max = (Integer) session.createQuery("SELECT max(id) from Venda").uniqueResult();
+		
+		if(max != null) return max + 1;
+		return 1;
+	}
 
 }

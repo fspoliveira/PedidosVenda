@@ -10,5 +10,6 @@ public interface VendaDao {
     public Venda getVenda(long id);
     public List<Venda> list();
     public void remove(Venda venda);
-    public void update(Venda venda);  
+    public void update(Venda venda); 
+    public Integer getMaxPedidoVenda();
 }

@@ -20,11 +20,13 @@ import org.eclipse.swt.widgets.Text;
 import br.com.fiap.controller.ClienteController;
 import br.com.fiap.controller.ProdutoController;
 import br.com.fiap.controller.TipoClienteController;
+import br.com.fiap.controller.VendaController;
 import br.com.fiap.model.Produto;
+import br.com.fiap.model.Venda;
 
 public class RegistroPedidos {
 	protected Shell shell;
-	private Text text;
+	private Text numPedido_txt;
 	private Table table;
 	private Text txt_qtd;
 	public Text txtR;
@@ -34,6 +36,8 @@ public class RegistroPedidos {
 	private SortedMap<String, String> produtos;
 	private SortedMap<String, String> tipoCliente;
 	private SortedMap<String, String> clientes;
+	private Integer linha = 1;
+	private VendaController vc = new VendaController() ;
 
 	public static void main(String[] args) {
 		try {
@@ -66,10 +70,11 @@ public class RegistroPedidos {
 		lblNroPedido.setBounds(44, 25, 87, 26);
 		lblNroPedido.setText("Nro. Pedido");
 
-		text = new Text(shell, SWT.BORDER | SWT.RIGHT);
-		text.setBounds(137, 22, 92, 29);
-		text.setEditable(false);
-
+		numPedido_txt = new Text(shell, SWT.BORDER | SWT.RIGHT);
+		numPedido_txt.setBounds(137, 22, 92, 29);
+		numPedido_txt.setEditable(false);
+		numPedido_txt.setText(vc.GetProximoPedido().toString());
+		
 		Label lblData = new Label(shell, SWT.NONE);
 		lblData.setBounds(254, 25, 68, 21);
 		lblData.setText("Data");
@@ -102,19 +107,19 @@ public class RegistroPedidos {
 
 		final Combo cliente_cmb = new Combo(shell, SWT.NONE);
 		cliente_cmb.setBounds(137, 110, 387, 29);
-		
-		//Adiciona clientes do banco de dados
+
+		// Adiciona clientes do banco de dados
 		ClienteController clienteC = new ClienteController();
 		clientes = clienteC.getClientes();
 		cliente_cmb.add("Selecione o cliente");
-		
+
 		iterator = clientes.keySet().iterator();
 		while (iterator.hasNext()) {
 			Object key = iterator.next();
-			cliente_cmb.add(clientes.get(key),
-					Integer.parseInt(key.toString()));
+			cliente_cmb
+					.add(clientes.get(key), Integer.parseInt(key.toString()));
 		}
-		
+
 		Label lblProduto = new Label(shell, SWT.NONE);
 		lblProduto.setBounds(44, 157, 68, 21);
 		lblProduto.setText("Produto");
@@ -130,7 +135,7 @@ public class RegistroPedidos {
 
 		iterator = produtos.keySet().iterator();
 		while (iterator.hasNext()) {
-			Object key = iterator.next();			
+			Object key = iterator.next();
 			produto_cmb
 					.add(produtos.get(key), Integer.parseInt(key.toString()));
 		}
@@ -163,6 +168,10 @@ public class RegistroPedidos {
 		TableColumn tblclmnTotal = new TableColumn(table, SWT.NONE);
 		tblclmnTotal.setWidth(100);
 		tblclmnTotal.setText("Total");
+		
+		TableColumn tblclmnLine = new TableColumn(table, SWT.NONE);
+		tblclmnLine.setWidth(100);
+		tblclmnLine.setText("Linha");
 
 		Label lblQuantidade = new Label(shell, SWT.NONE);
 		lblQuantidade.setBounds(545, 157, 79, 21);
@@ -190,8 +199,10 @@ public class RegistroPedidos {
 						txt_qtd.getText(),
 						"0",
 						Double.toString(Integer.parseInt(txt_qtd.getText())
-								* produto.getValorUnitario()) });
+								* produto.getValorUnitario()),linha.toString() });
 
+				
+				linha = linha  + 1;
 				getGrid();
 				calculaTotal(total);
 			}
@@ -209,7 +220,6 @@ public class RegistroPedidos {
 		btnCheckButton.setBounds(44, 447, 120, 26);
 		btnCheckButton.setSelection(false);
 		btnCheckButton.setText("Finalizar Pedido");
-		
 
 		btnCheckButton.addSelectionListener(new SelectionListener() {
 			public void widgetSelected(SelectionEvent arg0) {
@@ -225,12 +235,13 @@ public class RegistroPedidos {
 				switch (buttonID) {
 
 				case SWT.YES:
+					savePedido();
 					System.exit(0);
 
 				case SWT.NO:
-					
+
 					btnCheckButton.setSelection(false);
-					
+
 				}
 			}
 
@@ -271,5 +282,20 @@ public class RegistroPedidos {
 		}
 		total = calculaTotal(total);
 
+	}
+
+	public void savePedido() {
+		Venda v = new Venda();
+
+		TableItem[] selection = table.getItems();
+		for (int i = 0; i < selection.length; i++) {
+			
+			v.setId(Integer.parseInt(numPedido_txt.getText()));
+			v.setValorUnitario(Double.parseDouble(selection[i].getText(5)));
+			v.setLinha(Integer.parseInt(selection[i].getText(6)));
+
+			vc = new VendaController(v);
+			vc.adicionarVenda();
+		}
 	}
 }

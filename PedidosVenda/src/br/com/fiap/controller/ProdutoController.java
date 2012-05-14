@@ -23,7 +23,6 @@ public class ProdutoController {
 	
 	public Produto getProduto(long id){
 		ProdutoDao p = new ProdutoDaoImp();
-		return p.getProduto(id);
-		
+		return p.getProduto(id);		
 	}
 }

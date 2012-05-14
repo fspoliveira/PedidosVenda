@@ -17,14 +17,13 @@ public class Venda implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id
-    @GeneratedValue
+	@Id  
     @Column(name = "numPedido")
-	private long id;
+	private Integer id;
 	
-	@Id
-    @GeneratedValue
-	private int linha;
+	@Id  
+	@Column(name = "linha")
+	private Integer linha;
 	
 	private Date dataPedido;
 	
@@ -40,10 +39,12 @@ public class Venda implements Serializable {
 	private double valorUnitario;
 	private double desconto;
 	private double total;
-	public long getId() {
+	
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public Date getDataPedido() {
@@ -88,10 +89,12 @@ public class Venda implements Serializable {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	public int getLinha() {
+	
+	public Integer getLinha() {
 		return linha;
 	}
-	public void setLinha(int linha) {
+	public void setLinha(Integer linha) {
 		this.linha = linha;
 	}
+	
 }
