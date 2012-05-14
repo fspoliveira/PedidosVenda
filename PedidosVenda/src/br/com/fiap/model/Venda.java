@@ -22,6 +22,10 @@ public class Venda implements Serializable {
     @Column(name = "numPedido")
 	private long id;
 	
+	@Id
+    @GeneratedValue
+	private int linha;
+	
 	private Date dataPedido;
 	
 	@ManyToOne
@@ -83,5 +87,11 @@ public class Venda implements Serializable {
 	}
 	public void setTotal(double total) {
 		this.total = total;
+	}
+	public int getLinha() {
+		return linha;
+	}
+	public void setLinha(int linha) {
+		this.linha = linha;
 	}
 }
