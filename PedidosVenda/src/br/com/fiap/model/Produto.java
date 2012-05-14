@@ -57,6 +57,5 @@ public class Produto implements Serializable {
 	public void setVendas(Collection<Venda> vendas) {
 		this.vendas = vendas;
 	}
-	
 
 }

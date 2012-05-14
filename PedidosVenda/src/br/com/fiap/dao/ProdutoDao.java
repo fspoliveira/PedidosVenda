@@ -13,4 +13,3 @@ public interface ProdutoDao {
     public void remove(Produto produto);
     public void update(Produto produto);
 }
-
