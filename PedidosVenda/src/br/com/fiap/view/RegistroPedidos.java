@@ -1,5 +1,6 @@
 package br.com.fiap.view;
 
+import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.SortedMap;
 import org.eclipse.swt.SWT;
@@ -73,7 +74,12 @@ public class RegistroPedidos {
 		numPedido_txt = new Text(shell, SWT.BORDER | SWT.RIGHT);
 		numPedido_txt.setBounds(137, 22, 92, 29);
 		numPedido_txt.setEditable(false);
-		numPedido_txt.setText(vc.GetProximoPedido().toString());
+		try {
+			numPedido_txt.setText(vc.GetProximoPedido().toString());
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		Label lblData = new Label(shell, SWT.NONE);
 		lblData.setBounds(254, 25, 68, 21);

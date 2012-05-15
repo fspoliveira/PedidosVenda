@@ -1,5 +1,6 @@
 package br.com.fiap.dao;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -49,10 +50,14 @@ public class VendaDaoImp implements VendaDao {
 		t.commit();
 	}
 	
-	public Integer getMaxPedidoVenda(){
+	public Integer getMaxPedidoVenda() throws RemoteException{
 		
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();	
 		Integer max = (Integer) session.createQuery("SELECT max(id) from Venda").uniqueResult();
+		
+		if (max.equals(null)){
+			throw new RemoteException("Uma falha simulada ocorreu");
+		}
 		
 		if(max != null) return max + 1;
 		return 1;

@@ -1,5 +1,7 @@
 package br.com.fiap.controller;
 
+import java.rmi.RemoteException;
+
 import br.com.fiap.dao.VendaDao;
 import br.com.fiap.dao.VendaDaoImp;
 import br.com.fiap.model.Venda;
@@ -22,7 +24,7 @@ public class VendaController {
 		dao.save(venda);
 	}
 	
-	public Integer GetProximoPedido(){
+	public Integer GetProximoPedido() throws RemoteException{
 		VendaDao dao = new VendaDaoImp();
 		return dao.getMaxPedidoVenda();
 	}
