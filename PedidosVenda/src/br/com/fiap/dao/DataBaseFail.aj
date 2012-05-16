@@ -7,7 +7,7 @@ import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
 
 public aspect DataBaseFail {
 	
-	final int MAX_TENTATIVAS = 6;
+	final int MAX_TENTATIVAS = 5;
 
 	Object around() throws ConnectException :
 	call(public * VendaDao.get*(..) throws ConnectException) {
