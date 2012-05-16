@@ -1,18 +1,21 @@
 package br.com.fiap.dao;
 
+import java.net.ConnectException;
 import java.rmi.RemoteException;
+
+import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
 
 public aspect DataBaseFail {
 	
-	final int MAX_TENTATIVAS = 5;
+	final int MAX_TENTATIVAS = 6;
 
-	Object around() throws RemoteException :
-	call(public * VendaDao.get*(..) throws RemoteException) {
+	Object around() throws ConnectException :
+	call(public * VendaDao.get*(..) throws ConnectException) {
 		int retry = 0;
 		while (true) {
 			try {
 				return proceed();
-			} catch (RemoteException ex) {
+			} catch (ConnectException ex) {
 				System.out.println("Excecao: " + ex);
 				if (++retry > MAX_TENTATIVAS) {
 					throw ex;

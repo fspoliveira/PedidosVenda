@@ -1,5 +1,6 @@
 package br.com.fiap.view;
 
+import java.net.ConnectException;
 import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.SortedMap;
@@ -17,6 +18,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
+
+import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
 
 import br.com.fiap.controller.ClienteController;
 import br.com.fiap.controller.ProdutoController;
@@ -76,7 +79,7 @@ public class RegistroPedidos {
 		numPedido_txt.setEditable(false);
 		try {
 			numPedido_txt.setText(vc.GetProximoPedido().toString());
-		} catch (RemoteException e) {
+		} catch (ConnectException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

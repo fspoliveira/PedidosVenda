@@ -1,10 +1,14 @@
 package br.com.fiap.dao;
 
+import java.net.ConnectException;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
 
 import br.com.fiap.model.Venda;
 import br.com.fiap.util.HibernateUtil;
@@ -50,14 +54,29 @@ public class VendaDaoImp implements VendaDao {
 		t.commit();
 	}
 	
-	public Integer getMaxPedidoVenda() throws RemoteException{
+	public Integer getMaxPedidoVenda() throws ConnectException  {
+		Session session;
+		Integer max = null;
 		
-		Session session = HibernateUtil.getSessionFactory().openSession();	
-		Integer max = (Integer) session.createQuery("SELECT max(id) from Venda").uniqueResult();
+		session = HibernateUtil.getSessionFactory().openSession();
 		
-		if (max.equals(null)){
-			throw new RemoteException("Uma falha simulada ocorreu");
-		}
+		
+		 
+		
+		 Transaction tx = null;
+		 try {
+		     tx = session.beginTransaction();
+		     //do some work
+		     max = (Integer) session.createQuery("SELECT max(id) from Venda").uniqueResult();
+		     tx.commit();
+		 }
+		 catch (Exception e) {
+		     if (tx!=null) tx.rollback();
+		     throw new ConnectException("Não foi possível conectar no banco de dados");
+		 }
+		 finally {
+			 session.close();
+		 }
 		
 		if(max != null) return max + 1;
 		return 1;

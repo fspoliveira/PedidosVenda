@@ -1,6 +1,9 @@
 package br.com.fiap.controller;
 
+import java.net.ConnectException;
 import java.rmi.RemoteException;
+
+import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
 
 import br.com.fiap.dao.VendaDao;
 import br.com.fiap.dao.VendaDaoImp;
@@ -24,7 +27,7 @@ public class VendaController {
 		dao.save(venda);
 	}
 	
-	public Integer GetProximoPedido() throws RemoteException{
+	public Integer GetProximoPedido() throws ConnectException{
 		VendaDao dao = new VendaDaoImp();
 		return dao.getMaxPedidoVenda();
 	}
