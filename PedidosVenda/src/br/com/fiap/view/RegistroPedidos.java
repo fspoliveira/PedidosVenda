@@ -33,7 +33,7 @@ public class RegistroPedidos {
 	private Text numPedido_txt;
 	private Table table;
 	private Text txt_qtd;
-	public Text txtR;
+	public Text totalGeral_txt;
 	private Double total;
 
 	Iterator<String> iterator;
@@ -209,7 +209,6 @@ public class RegistroPedidos {
 						"0",
 						Double.toString(Integer.parseInt(txt_qtd.getText())
 								* produto.getValorUnitario()),linha.toString() });
-
 				
 				linha = linha  + 1;
 				getGrid();
@@ -221,9 +220,9 @@ public class RegistroPedidos {
 			}
 		});
 
-		txtR = new Text(shell, SWT.BORDER | SWT.RIGHT);
-		txtR.setBounds(526, 184, 150, 29);
-		txtR.setEditable(false);
+		totalGeral_txt = new Text(shell, SWT.BORDER | SWT.RIGHT);
+		totalGeral_txt.setBounds(526, 184, 150, 29);
+		totalGeral_txt.setEditable(false);
 
 		final Button btnCheckButton = new Button(shell, SWT.NONE);
 		btnCheckButton.setBounds(44, 447, 120, 26);
@@ -271,7 +270,7 @@ public class RegistroPedidos {
 			valor = valor + Double.parseDouble(selection[i].getText(5));
 		}
 
-		txtR.setText(total.toString());
+		totalGeral_txt.setText(total.toString());
 		return total;
 	}
 

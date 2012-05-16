@@ -16,5 +16,5 @@ public interface VendaDao {
     public List<Venda> list();
     public void remove(Venda venda);
     public void update(Venda venda); 
-    public Integer getMaxPedidoVenda() throws  ConnectException;
+    public Integer getMaxPedidoVenda() throws ConnectException;
 }
