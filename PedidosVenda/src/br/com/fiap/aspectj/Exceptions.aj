@@ -1,6 +1,6 @@
-package br.com.fiap.view;
+package br.com.fiap.aspectj;
 
-public aspect Item5 {
+public aspect Exceptions {
 
 	pointcut publicCall(): call(public Object *(..));
 
