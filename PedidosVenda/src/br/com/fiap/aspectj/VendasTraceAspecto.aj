@@ -14,24 +14,29 @@ public aspect VendasTraceAspecto {
 
 	private int _callDepth = -1;
 
-	//pointcut tracePoints() : ! within ( VendasTraceAspecto ) ;
-	pointcut tracePoints() :  within ( VendasTraceAspecto ) ;
+	pointcut tracePoints() : ! within ( VendasTraceAspecto ) ;
+	//pointcut tracePoints() :  within ( VendasTraceAspecto ) ;
 
 	before() : tracePoints()
 {
 		_callDepth++;
 		print("Before", thisJoinPoint);
+		
+		Logger logger = Logger.getLogger(VendaDao.class);
+		Logger.getLogger(this.getClass());
+		PropertyConfigurator.configure("log4j.properties");
+		logger.info("Log de auditoria antes de ser executada" + thisJoinPoint.getClass());
 	}
 
 	after() : tracePoints()
 {
 		print("After", thisJoinPoint);
-		Logger logger = Logger.getLogger(this.getClass());
+		Logger logger = Logger.getLogger(VendaDao.class);
 		Logger.getLogger(this.getClass());
 		PropertyConfigurator.configure("log4j.properties");
-		logger.info("Regra de negocio executada" + this.getClass());
+		logger.info("Log de auditoria depois de ser executada" + thisJoinPoint.getClass());
 		
-		System.out.println("Classe" + thisJoinPoint.getThis());
+		
 		
 		_callDepth--;
 	}
