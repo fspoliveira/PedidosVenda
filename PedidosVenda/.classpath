@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="lib/org.eclipse.text_3.5.101.v20110928-1504.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.ui.forms_3.5.101.v20111011-1919.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.swt_3.7.2.v3740f.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

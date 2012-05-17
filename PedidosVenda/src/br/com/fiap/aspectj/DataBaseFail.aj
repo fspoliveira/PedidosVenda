@@ -1,9 +1,9 @@
 package br.com.fiap.aspectj;
 
+import br.com.fiap.dao.VendaDao;
 import java.net.ConnectException;
-import java.rmi.RemoteException;
-
-import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 public aspect DataBaseFail {
 	
@@ -17,6 +17,11 @@ public aspect DataBaseFail {
 				return proceed();
 			} catch (ConnectException ex) {
 				System.out.println("Excecao: " + ex);
+				
+				Logger logger = Logger.getLogger(VendaDao.class);
+				PropertyConfigurator.configure("log4j.properties");
+				logger.error("Connect to database failed");
+				
 				if (++retry > MAX_TENTATIVAS) {
 					throw ex;
 				}
