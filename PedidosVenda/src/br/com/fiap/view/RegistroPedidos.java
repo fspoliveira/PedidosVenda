@@ -38,6 +38,16 @@ public class RegistroPedidos {
 	private SortedMap<String, String> clientes;
 	private Integer linha = 1;
 	private VendaController vc = new VendaController() ;
+	
+	
+
+	public Integer getLinha() {
+		return linha;
+	}
+
+	public void setLinha(Integer linha) {
+		this.linha = linha;
+	}
 
 	public static void main(String[] args) {
 		try {
@@ -208,7 +218,8 @@ public class RegistroPedidos {
 				
 				linha = linha  + 1;
 				getGrid();
-				calculaTotal(total);
+				calculaTotal(total, linha);
+								
 			}
 
 			public void widgetDefaultSelected(SelectionEvent arg0) {
@@ -259,7 +270,7 @@ public class RegistroPedidos {
 
 	}
 
-	public Double calculaTotal(Double total) {
+	public Double calculaTotal(Double total, int linha) {
 		Double valor = 0.00;
 		TableItem[] selection = table.getItems();
 		for (int i = 0; i < selection.length; i++) {
@@ -284,7 +295,7 @@ public class RegistroPedidos {
 		for (int i = 0; i < selection.length; i++) {
 			total = total + Double.parseDouble(selection[i].getText(5));
 		}
-		total = calculaTotal(total);
+		total = calculaTotal(total,0);
 
 	}
 
