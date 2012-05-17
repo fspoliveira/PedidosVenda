@@ -38,6 +38,7 @@ public class RegistroPedidos {
 	private SortedMap<String, String> clientes;
 	private Integer linha = 1;
 	private VendaController vc = new VendaController();
+	private Text qtd_txt;
 
 	public Integer getLinha() {
 		return linha;
@@ -265,17 +266,24 @@ public class RegistroPedidos {
 		Label lblTotalGeral = new Label(shell, SWT.NONE);
 		lblTotalGeral.setBounds(429, 194, 91, 19);
 		lblTotalGeral.setText("TOTAL GERAL");
+		
+		qtd_txt = new Text(shell, SWT.BORDER | SWT.RIGHT);
+		qtd_txt.setEditable(false);
+		qtd_txt.setBounds(254, 184, 150, 29);
 
 	}
 
 	public Double calculaTotal(Double total, int linha) {
 		Double valor = 0.00;
+		Integer quantidade=0;
 		TableItem[] selection = table.getItems();
 		for (int i = 0; i < selection.length; i++) {
 			valor = valor + Double.parseDouble(selection[i].getText(5));
+			quantidade = quantidade + Integer.parseInt(selection[i].getText(3));
 		}
 
 		totalGeral_txt.setText(total.toString());
+		qtd_txt.setText(quantidade.toString());
 		return total;
 	}
 
