@@ -2,6 +2,7 @@ package br.com.fiap.view;
 
 import java.net.ConnectException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.SortedMap;
@@ -42,6 +43,8 @@ public class RegistroPedidos {
 	private VendaController vc = new VendaController();
 	private Text qtd_txt;
 	private Cliente idCliente;
+	private Produto idProduto;
+	private Date dataPedido;
 
 	public Integer getLinha() {
 		return linha;
@@ -228,6 +231,12 @@ public class RegistroPedidos {
 				//Id Cliente
 				idCliente = new Cliente(cliente_cmb.getSelectionIndex());
 				
+				//Id Produto
+				idProduto = new Produto(produto_cmb.getSelectionIndex());
+				
+				//Data Pedido
+				dataPedido = new Date(dateTime.getYear(),dateTime.getMonth(),dateTime.getDay());
+			
 				//System.out.println("Quanto ta valendo+" + Integer.parseInt(qtd_txt.getText()));
 				calculaTotal(total, Integer.parseInt(qtd_txt.getText()));
 				calculaTotal(total);
@@ -351,8 +360,9 @@ public class RegistroPedidos {
 			v.setQuantidade(Integer.parseInt((selection[i].getText(3))));
 			v.setTotal((Double.parseDouble(selection[i].getText(5))));
 			v.setLinha(Integer.parseInt(selection[i].getText(6)));
-			v.setIdCliente(idCliente);
-			
+			v.setIdCliente(idCliente);	
+			v.setIdProduto(idProduto);
+			v.setDataPedido(dataPedido);
 
 			vc = new VendaController(v);
 			vc.adicionarVenda();

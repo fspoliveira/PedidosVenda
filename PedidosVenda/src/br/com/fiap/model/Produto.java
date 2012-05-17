@@ -25,6 +25,17 @@ public class Produto implements Serializable {
     
     @OneToMany(mappedBy = "idProduto", cascade=CascadeType.ALL)
 	private Collection<Venda> vendas;
+    
+    public Produto(){
+    	
+    }
+    
+	public Produto(long id) {
+		super();
+		this.id = id;
+	}
+
+
 
 	public long getId() {
 		return id;
