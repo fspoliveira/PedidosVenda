@@ -37,9 +37,7 @@ public class RegistroPedidos {
 	private SortedMap<String, String> tipoCliente;
 	private SortedMap<String, String> clientes;
 	private Integer linha = 1;
-	private VendaController vc = new VendaController() ;
-	
-	
+	private VendaController vc = new VendaController();
 
 	public Integer getLinha() {
 		return linha;
@@ -89,7 +87,7 @@ public class RegistroPedidos {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		Label lblData = new Label(shell, SWT.NONE);
 		lblData.setBounds(254, 25, 68, 21);
 		lblData.setText("Data");
@@ -183,7 +181,7 @@ public class RegistroPedidos {
 		TableColumn tblclmnTotal = new TableColumn(table, SWT.NONE);
 		tblclmnTotal.setWidth(100);
 		tblclmnTotal.setText("Total");
-		
+
 		TableColumn tblclmnLine = new TableColumn(table, SWT.NONE);
 		tblclmnLine.setWidth(100);
 		tblclmnLine.setText("Linha");
@@ -214,12 +212,12 @@ public class RegistroPedidos {
 						txt_qtd.getText(),
 						"0",
 						Double.toString(Integer.parseInt(txt_qtd.getText())
-								* produto.getValorUnitario()),linha.toString() });
-				
-				linha = linha  + 1;
+								* produto.getValorUnitario()), linha.toString() });
+
+				linha = linha + 1;
 				getGrid();
 				calculaTotal(total, linha);
-								
+
 			}
 
 			public void widgetDefaultSelected(SelectionEvent arg0) {
@@ -295,7 +293,7 @@ public class RegistroPedidos {
 		for (int i = 0; i < selection.length; i++) {
 			total = total + Double.parseDouble(selection[i].getText(5));
 		}
-		total = calculaTotal(total,0);
+		total = calculaTotal(total, 0);
 
 	}
 
@@ -304,7 +302,7 @@ public class RegistroPedidos {
 
 		TableItem[] selection = table.getItems();
 		for (int i = 0; i < selection.length; i++) {
-			
+
 			v.setId(Integer.parseInt(numPedido_txt.getText()));
 			v.setValorUnitario(Double.parseDouble(selection[i].getText(5)));
 			v.setLinha(Integer.parseInt(selection[i].getText(6)));
