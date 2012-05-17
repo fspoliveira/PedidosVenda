@@ -33,6 +33,15 @@ public class Cliente implements Serializable {
 	@OneToMany(mappedBy = "idCliente", cascade=CascadeType.ALL)
 	private Collection<Venda> vendas;
 	
+	public Cliente(){
+		
+	}
+		
+	public Cliente(long id) {
+		super();
+		this.id = id;
+	}
+
 	public long getId() {
 		return id;
 	}

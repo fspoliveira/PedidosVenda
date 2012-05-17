@@ -1,7 +1,9 @@
 package br.com.fiap.view;
 
 import java.net.ConnectException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.SortedMap;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -21,6 +23,7 @@ import br.com.fiap.controller.ClienteController;
 import br.com.fiap.controller.ProdutoController;
 import br.com.fiap.controller.TipoClienteController;
 import br.com.fiap.controller.VendaController;
+import br.com.fiap.model.Cliente;
 import br.com.fiap.model.Produto;
 import br.com.fiap.model.Venda;
 
@@ -31,7 +34,6 @@ public class RegistroPedidos {
 	private Text txt_qtd;
 	public Text totalGeral_txt;
 	private Double total;
-
 	Iterator<String> iterator;
 	private SortedMap<String, String> produtos;
 	private SortedMap<String, String> tipoCliente;
@@ -39,6 +41,7 @@ public class RegistroPedidos {
 	private Integer linha = 1;
 	private VendaController vc = new VendaController();
 	private Text qtd_txt;
+	private Cliente idCliente;
 
 	public Integer getLinha() {
 		return linha;
@@ -206,6 +209,9 @@ public class RegistroPedidos {
 				//Get info do produto
 				ProdutoController p = new ProdutoController();
 				Produto produto = p.getProduto(produto_cmb.getSelectionIndex());
+				
+				List<Produto> produtos = new ArrayList<Produto>();
+				produtos.add(produto);
 
 				it1.setText(new String[] {
 						Integer.toString(produto_cmb.getSelectionIndex()),
@@ -218,6 +224,9 @@ public class RegistroPedidos {
 
 				linha = linha + 1;
 				getGrid();
+				
+				//Id Cliente
+				idCliente = new Cliente(cliente_cmb.getSelectionIndex());
 				
 				//System.out.println("Quanto ta valendo+" + Integer.parseInt(qtd_txt.getText()));
 				calculaTotal(total, Integer.parseInt(qtd_txt.getText()));
@@ -338,8 +347,12 @@ public class RegistroPedidos {
 		for (int i = 0; i < selection.length; i++) {
 
 			v.setId(Integer.parseInt(numPedido_txt.getText()));
-			v.setValorUnitario(Double.parseDouble(selection[i].getText(5)));
+			v.setValorUnitario(Double.parseDouble(selection[i].getText(2)));
+			v.setQuantidade(Integer.parseInt((selection[i].getText(3))));
+			v.setTotal((Double.parseDouble(selection[i].getText(5))));
 			v.setLinha(Integer.parseInt(selection[i].getText(6)));
+			v.setIdCliente(idCliente);
+			
 
 			vc = new VendaController(v);
 			vc.adicionarVenda();
