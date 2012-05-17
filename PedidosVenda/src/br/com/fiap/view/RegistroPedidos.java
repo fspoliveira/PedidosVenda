@@ -203,6 +203,7 @@ public class RegistroPedidos {
 			public void widgetSelected(SelectionEvent event) {
 				TableItem it1 = new TableItem(table, SWT.NONE);
 
+				//Get info do produto
 				ProdutoController p = new ProdutoController();
 				Produto produto = p.getProduto(produto_cmb.getSelectionIndex());
 
@@ -218,8 +219,9 @@ public class RegistroPedidos {
 				linha = linha + 1;
 				getGrid();
 				
-				System.out.println("Quanto ta valendo+" + Integer.parseInt(qtd_txt.getText()));
+				//System.out.println("Quanto ta valendo+" + Integer.parseInt(qtd_txt.getText()));
 				calculaTotal(total, Integer.parseInt(qtd_txt.getText()));
+				calculaTotal(total);
 
 			}
 
@@ -284,14 +286,29 @@ public class RegistroPedidos {
 		
 		TableItem[] selection = table.getItems();
 		for (int i = 0; i < selection.length; i++) {
-			valor = valor + Double.parseDouble(selection[i].getText(5));
-			
+			valor = valor + Double.parseDouble(selection[i].getText(5));			
 		}
 
 		totalGeral_txt.setText(total.toString());
 		
 		return total;
 	}
+	
+	//teste
+	public Double calculaTotal(Double total) {
+		Double valor = 0.00;
+		
+		TableItem[] selection = table.getItems();
+		for (int i = 0; i < selection.length; i++) {
+			valor = valor + Double.parseDouble(selection[i].getText(5));			
+		}
+
+		totalGeral_txt.setText(total.toString());
+		
+		return total;
+	}
+	
+	
 
 	public void adicionaProd() {
 		System.out.println("Metodo Adiciona Produto");
