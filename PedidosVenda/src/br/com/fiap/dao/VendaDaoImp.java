@@ -23,7 +23,6 @@ public class VendaDaoImp implements VendaDao {
 		return (Venda) session.load(Venda.class, id);
 	}
 
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Venda> list() {
