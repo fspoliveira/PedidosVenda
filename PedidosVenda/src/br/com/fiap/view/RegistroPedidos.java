@@ -271,7 +271,11 @@ public class RegistroPedidos {
 		
 		qtd_txt = new Text(shell, SWT.BORDER | SWT.RIGHT);
 		qtd_txt.setEditable(false);
-		qtd_txt.setBounds(254, 184, 150, 29);
+		qtd_txt.setBounds(336, 184, 68, 29);
+		
+		Label lblTotalQtde = new Label(shell, SWT.NONE);
+		lblTotalQtde.setText("TOTAL QTDE");
+		lblTotalQtde.setBounds(231, 194, 91, 19);
 
 	}
 
