@@ -1,7 +1,6 @@
 package br.com.fiap.view;
 
 import java.net.ConnectException;
-import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.SortedMap;
 import org.eclipse.swt.SWT;
@@ -18,9 +17,6 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
-
-import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
-
 import br.com.fiap.controller.ClienteController;
 import br.com.fiap.controller.ProdutoController;
 import br.com.fiap.controller.TipoClienteController;

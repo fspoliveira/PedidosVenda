@@ -24,10 +24,12 @@ public class TipoClienteDaoImp implements TipoClienteDao{
 		return (TipoCliente) session.load(TipoCliente.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TipoCliente> list() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction t = session.beginTransaction();
+		@SuppressWarnings("rawtypes")
 		List lista = session.createQuery("from TipoCliente").list();
 		t.commit();
 		return lista;

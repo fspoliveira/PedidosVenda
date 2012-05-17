@@ -1,10 +1,6 @@
 package br.com.fiap.controller;
 
 import java.net.ConnectException;
-import java.rmi.RemoteException;
-
-import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
-
 import br.com.fiap.dao.VendaDao;
 import br.com.fiap.dao.VendaDaoImp;
 import br.com.fiap.model.Venda;

@@ -22,6 +22,7 @@ public class ClienteDaoImp implements ClienteDao {
 		return (Cliente) session.load(Cliente.class, id);
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public List<Cliente> list() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();

@@ -1,15 +1,9 @@
 package br.com.fiap.dao;
 
 import java.net.ConnectException;
-import java.rmi.RemoteException;
-import java.sql.SQLException;
 import java.util.List;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
-
 import br.com.fiap.model.Venda;
 import br.com.fiap.util.HibernateUtil;
 
@@ -29,10 +23,13 @@ public class VendaDaoImp implements VendaDao {
 		return (Venda) session.load(Venda.class, id);
 	}
 
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Venda> list() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction t = session.beginTransaction();
+		@SuppressWarnings("rawtypes")
 		List lista = session.createQuery("from Venda").list();
 		t.commit();
 		return lista;

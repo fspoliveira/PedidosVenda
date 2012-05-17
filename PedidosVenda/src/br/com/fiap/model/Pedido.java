@@ -5,12 +5,14 @@ import java.io.Serializable;
 
 public class Pedido implements Serializable  {
 	
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private Produto produto;
 	private double valorUnitario;
 	private int quantidade;
 	private double desconto;
 	private double total;
+	
 	
 	public long getId() {
 		return id;

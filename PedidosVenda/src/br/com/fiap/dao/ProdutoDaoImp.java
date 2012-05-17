@@ -24,10 +24,12 @@ public class ProdutoDaoImp implements ProdutoDao {
 		return (Produto) session.load(Produto.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Produto> list() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction t = session.beginTransaction();
+		@SuppressWarnings("rawtypes")
 		List lista = session.createQuery("from Produto").list();
 		t.commit();
 		return lista;
