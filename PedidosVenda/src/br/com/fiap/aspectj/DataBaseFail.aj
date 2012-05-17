@@ -11,16 +11,17 @@ public aspect DataBaseFail {
 
 	Object around() throws ConnectException :
 	call(public * br.com.fiap.dao.VendaDao.get*(..) throws ConnectException) {
-		int retry = 0;
+		int retry = 1;
 		while (true) {
 			try {
 				return proceed();
 			} catch (ConnectException ex) {
 				System.out.println("Excecao: " + ex);
 				
+				//Avisar no log sobre o ocorrido
 				Logger logger = Logger.getLogger(VendaDao.class);
 				PropertyConfigurator.configure("log4j.properties");
-				logger.error("Connect to database failed");
+				logger.error("Try:" + retry + " Connect to database failed");
 				
 				if (++retry > MAX_TENTATIVAS) {
 					throw ex;
@@ -29,5 +30,4 @@ public aspect DataBaseFail {
 			}
 		}
 	}
-
 }
