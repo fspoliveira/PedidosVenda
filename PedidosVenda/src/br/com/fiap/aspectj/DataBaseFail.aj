@@ -24,7 +24,7 @@ public aspect DataBaseFail {
 				realizar no máximo 5 tentativas, e avisar no log sobre o
 				ocorrido (usar Aspecto) */
 				
-				Logger logger = Logger.getLogger(TestException.class);
+				Logger logger = Logger.getLogger(VendaDao.class);
 				PropertyConfigurator.configure("log4j.properties");
 				logger.error("Try:" + retry + " Connect to database failed");
 				

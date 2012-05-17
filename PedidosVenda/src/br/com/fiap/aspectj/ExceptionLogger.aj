@@ -14,10 +14,10 @@ public aspect ExceptionLogger {
 	
 	after() throwing(Throwable ex) : exceptionLogMethods() {
 	Signature sig = thisJoinPointStaticPart.getSignature();
-	/*System.err.println("Exception logger aspect ["
+	System.err.println("Exception logger aspect ["
 	+ sig.getDeclaringType().getName() + "."
 	+ sig.getName() + "]");
-	ex.printStackTrace(System.err);*/
+	ex.printStackTrace(System.err);
 	
 	Logger logger = Logger.getLogger(VendaDao.class);	
 	
