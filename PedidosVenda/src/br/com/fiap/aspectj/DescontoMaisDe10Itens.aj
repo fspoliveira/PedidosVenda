@@ -8,7 +8,7 @@ public aspect DescontoMaisDe10Itens {
 		args(total, linha);
 
 	Double around(Double total, int linha) : modifiqueValor(total, linha){
-		if (linha > 11) {
+		if (linha > 10) {
 
 			/*
 			 * b) Se o cliente comprar mais de 10 itens de pedidos terá

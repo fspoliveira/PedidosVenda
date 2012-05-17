@@ -217,7 +217,9 @@ public class RegistroPedidos {
 
 				linha = linha + 1;
 				getGrid();
-				calculaTotal(total, linha);
+				
+				System.out.println("Quanto ta valendo+" + Integer.parseInt(qtd_txt.getText()));
+				calculaTotal(total, Integer.parseInt(qtd_txt.getText()));
 
 			}
 
@@ -275,15 +277,15 @@ public class RegistroPedidos {
 
 	public Double calculaTotal(Double total, int linha) {
 		Double valor = 0.00;
-		Integer quantidade=0;
+		
 		TableItem[] selection = table.getItems();
 		for (int i = 0; i < selection.length; i++) {
 			valor = valor + Double.parseDouble(selection[i].getText(5));
-			quantidade = quantidade + Integer.parseInt(selection[i].getText(3));
+			
 		}
 
 		totalGeral_txt.setText(total.toString());
-		qtd_txt.setText(quantidade.toString());
+		
 		return total;
 	}
 
@@ -297,10 +299,13 @@ public class RegistroPedidos {
 	public void getGrid() {
 
 		total = 0.00;
+		Integer quantidade=0;
 		TableItem[] selection = table.getItems();
 		for (int i = 0; i < selection.length; i++) {
 			total = total + Double.parseDouble(selection[i].getText(5));
+			quantidade = quantidade + Integer.parseInt(selection[i].getText(3));
 		}
+		qtd_txt.setText(quantidade.toString());
 		total = calculaTotal(total, 0);
 
 	}
