@@ -239,7 +239,7 @@ public class RegistroPedidos {
 			
 				//System.out.println("Quanto ta valendo+" + Integer.parseInt(qtd_txt.getText()));
 				calculaTotal(total, Integer.parseInt(qtd_txt.getText()));
-				calculaTotal(total);
+				//calculaTotal(total);
 
 			}
 
@@ -326,8 +326,6 @@ public class RegistroPedidos {
 		return total;
 	}
 	
-	
-
 	public void adicionaProd() {
 		System.out.println("Metodo Adiciona Produto");
 	}
