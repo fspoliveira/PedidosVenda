@@ -1,8 +1,10 @@
 package br.com.fiap.view;
 
 import java.net.ConnectException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.SortedMap;
@@ -44,7 +46,8 @@ public class RegistroPedidos {
 	private Text qtd_txt;
 	private Cliente idCliente;
 	private Produto idProduto;
-	private Date dataPedido;
+	private GregorianCalendar dataPedido;
+	
 
 	public Integer getLinha() {
 		return linha;
@@ -234,8 +237,10 @@ public class RegistroPedidos {
 				//Id Produto
 				idProduto = new Produto(produto_cmb.getSelectionIndex());
 				
-				//Data Pedido
-				dataPedido = new Date(dateTime.getYear(),dateTime.getMonth(),dateTime.getDay());
+				//Data Pedido				
+				dataPedido = new GregorianCalendar(dateTime.getYear(),dateTime.getMonth(),dateTime.getDay(),
+						dateTime.getHours(),dateTime.getMinutes(),dateTime.getSeconds()); 
+				//dataPedido = new GregorianCalendar(dateTime.getDay(),dateTime.getMonth(),dateTime.getYear()); 
 			
 				//System.out.println("Quanto ta valendo+" + Integer.parseInt(qtd_txt.getText()));
 				calculaTotal(total, Integer.parseInt(qtd_txt.getText()));

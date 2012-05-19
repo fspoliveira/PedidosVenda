@@ -2,6 +2,7 @@ package br.com.fiap.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +25,7 @@ public class Venda implements Serializable {
 	@Column(name = "linha")
 	private Integer linha;
 	
-	private Date dataPedido;
+	private GregorianCalendar dataPedido;
 	
 	@ManyToOne
 	@JoinColumn(name="idCliente")
@@ -46,10 +47,10 @@ public class Venda implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Date getDataPedido() {
+	public GregorianCalendar getDataPedido() {
 		return dataPedido;
 	}
-	public void setDataPedido(Date dataPedido) {
+	public void setDataPedido(GregorianCalendar dataPedido) {
 		this.dataPedido = dataPedido;
 	}
 	public Cliente getIdCliente() {
