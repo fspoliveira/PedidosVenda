@@ -1,9 +1,7 @@
 package br.com.fiap.view;
 
 import java.net.ConnectException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
@@ -218,8 +216,7 @@ public class RegistroPedidos {
 
 				listProdutos.add(produto);
 
-				for (Iterator iterator = listProdutos.iterator(); iterator
-						.hasNext();) {
+				for (Iterator iterator = listProdutos.iterator(); iterator.hasNext();) {
 					Produto prod = (Produto) iterator.next();
 					System.out.println(prod.getDescricao());
 				}
@@ -251,7 +248,7 @@ public class RegistroPedidos {
 						.getMonth(), dateTime.getDay(), dateTime.getHours(),
 						dateTime.getMinutes(), dateTime.getSeconds());
 				
-				calculaTotal(total, Integer.parseInt(qtd_txt.getText()));				
+				calculaTotal(total, Integer.parseInt(qtd_txt.getText()),listProdutos );				
 
 			}
 
@@ -311,7 +308,7 @@ public class RegistroPedidos {
 
 	}
 
-	public Double calculaTotal(Double total, int qtdItems) {
+	public Double calculaTotal(Double total, int qtdItems, List<Produto> listProdutos2 ) {
 		Double valor = 0.00;
 
 		TableItem[] selection = table.getItems();
@@ -323,7 +320,20 @@ public class RegistroPedidos {
 
 		return total;
 	}
+	
+	public Double calcGrid(Double total) {
+		Double valor = 0.00;
 
+		TableItem[] selection = table.getItems();
+		for (int i = 0; i < selection.length; i++) {
+			valor = valor + Double.parseDouble(selection[i].getText(5));
+		}
+
+		totalGeral_txt.setText(total.toString());
+
+		return total;
+	}
+	
 	public void adicionaProd() {
 		System.out.println("Metodo Adiciona Produto");
 	}
@@ -341,7 +351,7 @@ public class RegistroPedidos {
 			quantidade = quantidade + Integer.parseInt(selection[i].getText(3));
 		}
 		qtd_txt.setText(quantidade.toString());
-		total = calculaTotal(total, 0);
+		total = calcGrid(total);
 
 	}
 
