@@ -215,14 +215,15 @@ public class RegistroPedidos {
 				Produto produto = p.getProduto(produto_cmb.getSelectionIndex());
 
 				listProdutos.add(produto);
-
+/*
 				for (Iterator iterator = listProdutos.iterator(); iterator.hasNext();) {
 					Produto prod = (Produto) iterator.next();
 					System.out.println(prod.getDescricao());
 				}
+				
 
-				/*for (int i = 0; i < listProdutos.size(); i++) {
-					System.out.println(listProdutos.get(i).getDescricao());
+				for (int i = 0; i < listProdutos.size(); i++) {
+					System.out.println(listProdutos.get(i).getDescricao());				
 				}*/
 
 				it1.setText(new String[] {
@@ -248,8 +249,9 @@ public class RegistroPedidos {
 						.getMonth(), dateTime.getDay(), dateTime.getHours(),
 						dateTime.getMinutes(), dateTime.getSeconds());
 				
-				calculaTotal(total, Integer.parseInt(qtd_txt.getText()),listProdutos );				
-
+				calculaTotal(total, Integer.parseInt(qtd_txt.getText()),listProdutos );	
+				
+				//falta refresh Grid
 			}
 
 			public void widgetDefaultSelected(SelectionEvent arg0) {
