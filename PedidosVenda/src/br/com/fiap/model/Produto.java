@@ -23,6 +23,9 @@ public class Produto implements Serializable {
     @Column(name = "valorUnitarioProduto")
 	private double valorUnitario;
     
+    @Column(name = "descontoProduto")
+	private double descontoProduto;
+    
     @OneToMany(mappedBy = "idProduto", cascade=CascadeType.ALL)
 	private Collection<Venda> vendas;
     
@@ -68,5 +71,14 @@ public class Produto implements Serializable {
 	public void setVendas(Collection<Venda> vendas) {
 		this.vendas = vendas;
 	}
+
+	public double getDescontoProduto() {
+		return descontoProduto;
+	}
+
+	public void setDescontoProduto(double descontoProduto) {
+		this.descontoProduto = descontoProduto;
+	}
+	
 
 }

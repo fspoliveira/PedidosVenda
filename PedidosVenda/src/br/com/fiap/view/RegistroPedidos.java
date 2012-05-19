@@ -47,7 +47,7 @@ public class RegistroPedidos {
 	private Cliente idCliente;
 	private Produto idProduto;
 	private GregorianCalendar dataPedido;
-	
+	List<Produto> listProdutos = new ArrayList<Produto>();
 
 	public Integer getLinha() {
 		return linha;
@@ -212,39 +212,47 @@ public class RegistroPedidos {
 			public void widgetSelected(SelectionEvent event) {
 				TableItem it1 = new TableItem(table, SWT.NONE);
 
-				//Get info do produto
+				// Get info do produto
 				ProdutoController p = new ProdutoController();
 				Produto produto = p.getProduto(produto_cmb.getSelectionIndex());
-				
-				List<Produto> produtos = new ArrayList<Produto>();
-				produtos.add(produto);
+
+				listProdutos.add(produto);
+
+				for (Iterator iterator = listProdutos.iterator(); iterator
+						.hasNext();) {
+					Produto prod = (Produto) iterator.next();
+					System.out.println(prod.getDescricao());
+				}
+
+				/*for (int i = 0; i < listProdutos.size(); i++) {
+					System.out.println(listProdutos.get(i).getDescricao());
+				}*/
 
 				it1.setText(new String[] {
 						Integer.toString(produto_cmb.getSelectionIndex()),
 						produto_cmb.getText(),
 						Double.toString(produto.getValorUnitario()),
 						txt_qtd.getText(),
-						"0",
+						Double.toString(produto.getDescontoProduto()),
 						Double.toString(Integer.parseInt(txt_qtd.getText())
 								* produto.getValorUnitario()), linha.toString() });
 
 				linha = linha + 1;
 				getGrid();
-				
-				//Id Cliente
+
+				// Id Cliente
 				idCliente = new Cliente(cliente_cmb.getSelectionIndex());
-				
-				//Id Produto
+
+				// Id Produto
 				idProduto = new Produto(produto_cmb.getSelectionIndex());
+
+				// Data Pedido
+				dataPedido = new GregorianCalendar(dateTime.getYear(), dateTime
+						.getMonth(), dateTime.getDay(), dateTime.getHours(),
+						dateTime.getMinutes(), dateTime.getSeconds());
 				
-				//Data Pedido				
-				dataPedido = new GregorianCalendar(dateTime.getYear(),dateTime.getMonth(),dateTime.getDay(),
-						dateTime.getHours(),dateTime.getMinutes(),dateTime.getSeconds()); 
-				//dataPedido = new GregorianCalendar(dateTime.getDay(),dateTime.getMonth(),dateTime.getYear()); 
-			
-				//System.out.println("Quanto ta valendo+" + Integer.parseInt(qtd_txt.getText()));
 				calculaTotal(total, Integer.parseInt(qtd_txt.getText()));
-				//calculaTotal(total);
+				
 
 			}
 
@@ -293,11 +301,11 @@ public class RegistroPedidos {
 		Label lblTotalGeral = new Label(shell, SWT.NONE);
 		lblTotalGeral.setBounds(429, 194, 91, 19);
 		lblTotalGeral.setText("TOTAL GERAL");
-		
+
 		qtd_txt = new Text(shell, SWT.BORDER | SWT.RIGHT);
 		qtd_txt.setEditable(false);
 		qtd_txt.setBounds(336, 184, 68, 29);
-		
+
 		Label lblTotalQtde = new Label(shell, SWT.NONE);
 		lblTotalQtde.setText("TOTAL QTDE");
 		lblTotalQtde.setBounds(231, 194, 91, 19);
@@ -306,31 +314,31 @@ public class RegistroPedidos {
 
 	public Double calculaTotal(Double total, int linha) {
 		Double valor = 0.00;
-		
+
 		TableItem[] selection = table.getItems();
 		for (int i = 0; i < selection.length; i++) {
-			valor = valor + Double.parseDouble(selection[i].getText(5));			
+			valor = valor + Double.parseDouble(selection[i].getText(5));
 		}
 
 		totalGeral_txt.setText(total.toString());
-		
+
 		return total;
 	}
-	
-	//teste
+
+	// teste
 	public Double calculaTotal(Double total) {
 		Double valor = 0.00;
-		
+
 		TableItem[] selection = table.getItems();
 		for (int i = 0; i < selection.length; i++) {
-			valor = valor + Double.parseDouble(selection[i].getText(5));			
+			valor = valor + Double.parseDouble(selection[i].getText(5));
 		}
 
 		totalGeral_txt.setText(total.toString());
-		
+
 		return total;
 	}
-	
+
 	public void adicionaProd() {
 		System.out.println("Metodo Adiciona Produto");
 	}
@@ -341,7 +349,7 @@ public class RegistroPedidos {
 	public void getGrid() {
 
 		total = 0.00;
-		Integer quantidade=0;
+		Integer quantidade = 0;
 		TableItem[] selection = table.getItems();
 		for (int i = 0; i < selection.length; i++) {
 			total = total + Double.parseDouble(selection[i].getText(5));
@@ -363,7 +371,7 @@ public class RegistroPedidos {
 			v.setQuantidade(Integer.parseInt((selection[i].getText(3))));
 			v.setTotal((Double.parseDouble(selection[i].getText(5))));
 			v.setLinha(Integer.parseInt(selection[i].getText(6)));
-			v.setIdCliente(idCliente);	
+			v.setIdCliente(idCliente);
 			v.setIdProduto(idProduto);
 			v.setDataPedido(dataPedido);
 
