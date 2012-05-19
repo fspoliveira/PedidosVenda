@@ -251,8 +251,7 @@ public class RegistroPedidos {
 						.getMonth(), dateTime.getDay(), dateTime.getHours(),
 						dateTime.getMinutes(), dateTime.getSeconds());
 				
-				calculaTotal(total, Integer.parseInt(qtd_txt.getText()));
-				
+				calculaTotal(total, Integer.parseInt(qtd_txt.getText()));				
 
 			}
 
@@ -312,21 +311,7 @@ public class RegistroPedidos {
 
 	}
 
-	public Double calculaTotal(Double total, int linha) {
-		Double valor = 0.00;
-
-		TableItem[] selection = table.getItems();
-		for (int i = 0; i < selection.length; i++) {
-			valor = valor + Double.parseDouble(selection[i].getText(5));
-		}
-
-		totalGeral_txt.setText(total.toString());
-
-		return total;
-	}
-
-	// teste
-	public Double calculaTotal(Double total) {
+	public Double calculaTotal(Double total, int qtdItems) {
 		Double valor = 0.00;
 
 		TableItem[] selection = table.getItems();

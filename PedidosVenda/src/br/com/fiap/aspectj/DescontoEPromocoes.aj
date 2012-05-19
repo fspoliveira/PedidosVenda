@@ -2,13 +2,13 @@ package br.com.fiap.aspectj;
 
 import br.com.fiap.view.RegistroPedidos;
 
-public aspect DescontoMaisDe10Itens {
-	pointcut modifiqueValor(Double total, int linha):
+public aspect DescontoEPromocoes {
+	pointcut modifiqueValor(Double total, int qtdItems):
 		call(* RegistroPedidos.calculaTotal(Double, int)) &&
-		args(total, linha);
+		args(total, qtdItems);
 
-	Double around(Double total, int linha) : modifiqueValor(total, linha){
-		if (linha > 10) {
+	Double around(Double total, int qtdItems) : modifiqueValor(total, qtdItems){
+		if (qtdItems > 10) {
 
 			/*
 			 * b) Se o cliente comprar mais de 10 itens de pedidos terá
@@ -17,9 +17,9 @@ public aspect DescontoMaisDe10Itens {
 
 			Double desconto = total - (total * 0.05);
 
-			return proceed(desconto, linha);
+			return proceed(desconto, qtdItems);
 		} else {
-			return proceed(total, linha);
+			return proceed(total, qtdItems);
 		}
 	}
 }
