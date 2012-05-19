@@ -216,14 +216,14 @@ public class RegistroPedidos {
 
 				listProdutos.add(produto);
 /*
-				for (Iterator iterator = listProdutos.iterator(); iterator.hasNext();) {
+				for (Iterator iterator = listProdutos.iterator(); iterator
+						.hasNext();) {
 					Produto prod = (Produto) iterator.next();
 					System.out.println(prod.getDescricao());
 				}
-				
 
 				for (int i = 0; i < listProdutos.size(); i++) {
-					System.out.println(listProdutos.get(i).getDescricao());				
+					System.out.println(listProdutos.get(i).getDescricao());
 				}*/
 
 				it1.setText(new String[] {
@@ -234,6 +234,8 @@ public class RegistroPedidos {
 						Double.toString(produto.getDescontoProduto()),
 						Double.toString(Integer.parseInt(txt_qtd.getText())
 								* produto.getValorUnitario()), linha.toString() });
+
+				linha = linha + 1;
 
 				linha = linha + 1;
 				getGrid();
@@ -248,10 +250,25 @@ public class RegistroPedidos {
 				dataPedido = new GregorianCalendar(dateTime.getYear(), dateTime
 						.getMonth(), dateTime.getDay(), dateTime.getHours(),
 						dateTime.getMinutes(), dateTime.getSeconds());
-				
-				calculaTotal(total, Integer.parseInt(qtd_txt.getText()),listProdutos );	
-				
-				//falta refresh Grid
+
+				calculaTotal(total, Integer.parseInt(qtd_txt.getText()),
+						listProdutos);
+
+				// table.removeAll();
+
+				// refresh table
+
+				TableItem[] selection = table.getItems();
+				for (int i = 0; i < selection.length; i++) {
+					selection[i].setText(4, Double.toString(listProdutos.get(i)
+							.getDescontoProduto()));
+				}
+
+				for (int i = 0; i < listProdutos.size(); i++) {
+					it1.setText(4, Double.toString(listProdutos.get(i)
+							.getDescontoProduto()));
+				}
+
 			}
 
 			public void widgetDefaultSelected(SelectionEvent arg0) {
@@ -310,7 +327,8 @@ public class RegistroPedidos {
 
 	}
 
-	public Double calculaTotal(Double total, int qtdItems, List<Produto> listProdutos2 ) {
+	public Double calculaTotal(Double total, int qtdItems,
+			List<Produto> listProdutos2) {
 		Double valor = 0.00;
 
 		TableItem[] selection = table.getItems();
@@ -322,7 +340,7 @@ public class RegistroPedidos {
 
 		return total;
 	}
-	
+
 	public Double calcGrid(Double total) {
 		Double valor = 0.00;
 
@@ -335,7 +353,7 @@ public class RegistroPedidos {
 
 		return total;
 	}
-	
+
 	public void adicionaProd() {
 		System.out.println("Metodo Adiciona Produto");
 	}
@@ -376,4 +394,5 @@ public class RegistroPedidos {
 			vc.adicionarVenda();
 		}
 	}
+
 }
