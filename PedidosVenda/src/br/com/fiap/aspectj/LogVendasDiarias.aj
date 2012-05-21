@@ -22,6 +22,7 @@ public aspect LogVendasDiarias {
 		Logger logger = Logger.getLogger(RegistroPedidos.class);
 		PropertyConfigurator.configure("log4j.properties");
 		logger.info("Pedido: " + pedido + " Total do Pedido: " + totalPedido
-				+ " Quantidade de Ítens " + qtdeItems);
+				+ " Quantidade de Ítens " + qtdeItems
+				+ " Usuário: " + System.getProperty("user.name"));
 	}
 }

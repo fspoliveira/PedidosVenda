@@ -30,6 +30,12 @@ public class Main {
         System.out.println("Quanto ta valendo a data" + cal.get(Calendar.MONTH));    
         System.out.println("Quanto ta valendo a data" + cal.get(Calendar.DAY_OF_MONTH)); 
         
+        System.out.println(System.getProperty("os.name"));
+        
+        System.out.println(System.getProperty("os.name"));
+        System.out.println(System.getProperties());
+        System.out.println(System.getProperty("user.name"));
+        
 	}
 	
 	
