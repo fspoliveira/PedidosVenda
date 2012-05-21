@@ -250,9 +250,9 @@ public class RegistroPedidos {
 				dataPedido = new GregorianCalendar(dateTime.getYear(), dateTime
 						.getMonth(), dateTime.getDay(), dateTime.getHours(),
 						dateTime.getMinutes(), dateTime.getSeconds());
-
+						
 				calculaTotal(total, Integer.parseInt(qtd_txt.getText()),
-						listProdutos);
+				listProdutos,dataPedido);
 
 				// table.removeAll();
 
@@ -328,7 +328,7 @@ public class RegistroPedidos {
 	}
 
 	public Double calculaTotal(Double total, int qtdItems,
-			List<Produto> listProdutos2) {
+			List<Produto> listProdutos2, GregorianCalendar dataPedido) {
 		Double valor = 0.00;
 
 		TableItem[] selection = table.getItems();

@@ -1,18 +1,22 @@
 package br.com.fiap.aspectj;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
-
 import br.com.fiap.view.RegistroPedidos;
 import br.com.fiap.model.Produto;
 
 public aspect DescontoEPromocoes {
 	pointcut modifiqueValor(Double total, int qtdItems,
-			List<Produto> listProdutos2):
-		call(* RegistroPedidos.calculaTotal(Double, int, List<Produto>)) &&
-		args(total, qtdItems, listProdutos2 );
+			List<Produto> listProdutos2, GregorianCalendar dataPedido):
+		call(* RegistroPedidos.calculaTotal(Double, int, List<Produto>, GregorianCalendar)) &&
+		args(total, qtdItems, listProdutos2, dataPedido );
 
-	Double around(Double total, int qtdItems, List<Produto> listProdutos2) : modifiqueValor(total, qtdItems,listProdutos2){
-
+	Double around(Double total, int qtdItems, List<Produto> listProdutos2,
+			GregorianCalendar dataPedido) : modifiqueValor(total, qtdItems,listProdutos2,dataPedido){
+		
+		int mesPedido = dataPedido.get(Calendar.MONTH);
+			
 		/*
 		 * a) Toda venda maior que R$ 1.000,00 terá desconto de 5% do valor em
 		 * cada item;
@@ -31,7 +35,7 @@ public aspect DescontoEPromocoes {
 			}
 
 			System.out.println("Desconto nos itens de 5%?");
-			return proceed(total, qtdItems, listProdutos2);
+			return proceed(total, qtdItems, listProdutos2,dataPedido);
 		}
 
 		/*
@@ -43,9 +47,19 @@ public aspect DescontoEPromocoes {
 
 			Double descontoTotal = total - (total * 0.05);
 
-			return proceed(descontoTotal, qtdItems, listProdutos2);
+			return proceed(descontoTotal, qtdItems, listProdutos2,dataPedido);
+		}
+		
+		/*c) Para pedidos emitidos entre os meses de Agosto e Setembro
+		  deverá ser adicionado um adicional de 10% do total do valor
+		  total do pedido*/
+
+		if((mesPedido == 7) || (mesPedido == 8)){
+			
+			Double adicionalTotal = total + (total * 0.05);
+			return proceed(adicionalTotal, qtdItems, listProdutos2,dataPedido);
 		}
 
-		return proceed(total, qtdItems, listProdutos2);
+		return proceed(total, qtdItems, listProdutos2,dataPedido);
 	}
 }
