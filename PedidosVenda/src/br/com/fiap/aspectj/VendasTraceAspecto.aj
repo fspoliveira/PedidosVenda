@@ -36,8 +36,6 @@ public aspect VendasTraceAspecto {
 		PropertyConfigurator.configure("log4j.properties");
 		logger.info("Log de auditoria depois de ser executada" + thisJoinPoint.getClass());
 		
-		
-		
 		_callDepth--;
 	}
 
