@@ -11,10 +11,11 @@ public class VendaDaoImp implements VendaDao {
 	
 	@Override
 	public void save(Venda venda) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		//Este metodo esta sendo introspectado por commit via Aspectj
+		/*Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		Transaction t = session.beginTransaction();
 		session.save(venda);
-		t.commit();
+		t.commit();*/
 	}
 
 	@Override
