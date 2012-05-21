@@ -215,16 +215,14 @@ public class RegistroPedidos {
 				Produto produto = p.getProduto(produto_cmb.getSelectionIndex());
 
 				listProdutos.add(produto);
-/*
-				for (Iterator iterator = listProdutos.iterator(); iterator
-						.hasNext();) {
-					Produto prod = (Produto) iterator.next();
-					System.out.println(prod.getDescricao());
-				}
-
-				for (int i = 0; i < listProdutos.size(); i++) {
-					System.out.println(listProdutos.get(i).getDescricao());
-				}*/
+				/*
+				 * for (Iterator iterator = listProdutos.iterator(); iterator
+				 * .hasNext();) { Produto prod = (Produto) iterator.next();
+				 * System.out.println(prod.getDescricao()); }
+				 * 
+				 * for (int i = 0; i < listProdutos.size(); i++) {
+				 * System.out.println(listProdutos.get(i).getDescricao()); }
+				 */
 
 				it1.setText(new String[] {
 						Integer.toString(produto_cmb.getSelectionIndex()),
@@ -250,26 +248,43 @@ public class RegistroPedidos {
 				dataPedido = new GregorianCalendar(dateTime.getYear(), dateTime
 						.getMonth(), dateTime.getDay(), dateTime.getHours(),
 						dateTime.getMinutes(), dateTime.getSeconds());
-						
+
 				calculaTotal(total, Integer.parseInt(qtd_txt.getText()),
-				listProdutos,dataPedido);
-				
-				System.out.println("Total do pedido " +total );
+						listProdutos, dataPedido);
+
+				System.out.println("Total do pedido " + total);
 
 				// table.removeAll();
 
 				// refresh table
 
+				Double valorTotal;
+
 				TableItem[] selection = table.getItems();
 				for (int i = 0; i < selection.length; i++) {
 					selection[i].setText(4, Double.toString(listProdutos.get(i)
 							.getDescontoProduto()));
+
+					if (listProdutos.get(i).getDescontoProduto() > 0) {
+						valorTotal = listProdutos.get(i).getValorUnitario()
+								- (listProdutos.get(i).getValorUnitario() * listProdutos
+										.get(i).getDescontoProduto());
+
+						selection[i].setText(5, Double.toString(valorTotal));
+					}
+
 				}
 
-				for (int i = 0; i < listProdutos.size(); i++) {
-					it1.setText(4, Double.toString(listProdutos.get(i)
-							.getDescontoProduto()));
-				}
+				/*
+				 * for (int i = 0; i < listProdutos.size(); i++) {
+				 * it1.setText(4, Double.toString(listProdutos.get(i)
+				 * .getDescontoProduto()));
+				 * 
+				 * 
+				 * 
+				 * 
+				 * }
+				 */
 
 			}
 
@@ -301,11 +316,11 @@ public class RegistroPedidos {
 				switch (buttonID) {
 
 				case SWT.YES:
-					
+
 					savePedido();
-					Total(Integer.parseInt(numPedido_txt.getText()),total,
+					Total(Integer.parseInt(numPedido_txt.getText()), total,
 							Integer.parseInt(qtd_txt.getText()));
-					
+
 					System.exit(0);
 
 				case SWT.NO:
@@ -342,7 +357,7 @@ public class RegistroPedidos {
 			valor = valor + Double.parseDouble(selection[i].getText(5));
 		}
 
-		totalGeral_txt.setText(total.toString());		
+		totalGeral_txt.setText(total.toString());
 
 		return total;
 	}
@@ -380,9 +395,9 @@ public class RegistroPedidos {
 		total = calcGrid(total);
 
 	}
-	
-	public void Total(Integer Pedido, Double total, Integer qtdeItens){
-		
+
+	public void Total(Integer Pedido, Double total, Integer qtdeItens) {
+
 	}
 
 	public void savePedido() {
@@ -399,11 +414,11 @@ public class RegistroPedidos {
 			v.setIdCliente(idCliente);
 			v.setIdProduto(idProduto);
 			v.setDataPedido(dataPedido);
-			
+
 			vc = new VendaController(v);
 			vc.adicionarVenda();
 		}
-		
+
 	}
 
 }
