@@ -10,5 +10,4 @@ public class TestException {
 		Object nullObj = null;
 		nullObj.toString();
 	}
-
 }
