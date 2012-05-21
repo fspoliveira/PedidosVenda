@@ -253,6 +253,8 @@ public class RegistroPedidos {
 						
 				calculaTotal(total, Integer.parseInt(qtd_txt.getText()),
 				listProdutos,dataPedido);
+				
+				System.out.println("Total do pedido " +total );
 
 				// table.removeAll();
 
@@ -299,7 +301,11 @@ public class RegistroPedidos {
 				switch (buttonID) {
 
 				case SWT.YES:
+					
 					savePedido();
+					Total(Integer.parseInt(numPedido_txt.getText()),total,
+							Integer.parseInt(qtd_txt.getText()));
+					
 					System.exit(0);
 
 				case SWT.NO:
@@ -336,7 +342,7 @@ public class RegistroPedidos {
 			valor = valor + Double.parseDouble(selection[i].getText(5));
 		}
 
-		totalGeral_txt.setText(total.toString());
+		totalGeral_txt.setText(total.toString());		
 
 		return total;
 	}
@@ -374,6 +380,10 @@ public class RegistroPedidos {
 		total = calcGrid(total);
 
 	}
+	
+	public void Total(Integer Pedido, Double total, Integer qtdeItens){
+		
+	}
 
 	public void savePedido() {
 		Venda v = new Venda();
@@ -389,10 +399,11 @@ public class RegistroPedidos {
 			v.setIdCliente(idCliente);
 			v.setIdProduto(idProduto);
 			v.setDataPedido(dataPedido);
-
+			
 			vc = new VendaController(v);
 			vc.adicionarVenda();
 		}
+		
 	}
 
 }
