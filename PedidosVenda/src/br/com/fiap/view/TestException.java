@@ -1,4 +1,4 @@
-package br.com.fiap.test;
+package br.com.fiap.view;
 
 public class TestException {
 

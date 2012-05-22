@@ -12,9 +12,7 @@ public aspect VendasTraceAspecto {
 	 * 1.Gerar log de auditoria antes e depois de cada regra de negócio
 	 * executada.
 	 */
-	
-	
-	
+		
 	private int _callDepth = -1;
 
 	//pointcut tracePoints() : ! within ( VendasTraceAspecto ) ;
@@ -39,7 +37,7 @@ public aspect VendasTraceAspecto {
 				.concat(".").concat(thisJoinPoint.getSourceLocation().getFileName().replace(".java", ".class")));
 		Logger.getLogger(this.getClass());
 		PropertyConfigurator.configure("log4j.properties");
-		logger.info("Log de auditoria depois da regra de negócio ser executada" + thisJoinPoint.getClass());
+		logger.info("Log de auditoria depois da regra de negócio ser executada: " + thisJoinPoint.getClass());
 		
 		_callDepth--;
 	}

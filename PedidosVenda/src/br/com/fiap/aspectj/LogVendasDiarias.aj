@@ -16,13 +16,13 @@ public aspect LogVendasDiarias {
 
 		/*
 		 * 2. Gerar log de vendas diárias contendo a quantidade e valores totais
-		 * dos pedidos gerados. (1,0 ponto)
+		 * dos pedidos gerados.
 		 */
 
 		Logger logger = Logger.getLogger(RegistroPedidos.class);
 		PropertyConfigurator.configure("log4j.properties");
 		logger.info("Pedido: " + pedido + " Total do Pedido: " + totalPedido
-				+ " Quantidade de Ítens " + qtdeItems
-				+ " Usuário: " + System.getProperty("user.name"));
+				+ " Quantidade de Ítens " + qtdeItems + " Usuário: "
+				+ System.getProperty("user.name"));
 	}
 }

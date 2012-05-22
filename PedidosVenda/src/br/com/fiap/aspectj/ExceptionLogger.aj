@@ -13,6 +13,9 @@ public aspect ExceptionLogger {
 		System.err.println("Exception logger aspect ["
 				+ sig.getDeclaringType().getName() + "." + sig.getName() + "]");
 		ex.printStackTrace(System.err);
+		
+		/*5. Logar todas as Exceções ocorridas no Projeto através de
+		Aspectos*/
 	
 		Logger logger = Logger.getLogger(thisJoinPoint.getStaticPart().getSourceLocation().getWithinType().getPackage().getName()
 				.concat(".").concat(thisJoinPoint.getSourceLocation().getFileName().replace(".java", ".class")));

@@ -1,4 +1,0 @@
-2012-05-20 22:59:32,829 INFO  br.com.fiap.view.RegistroPedidos - LogVendasDiarias.aj:24 - Pedido: 10 Total do Pedido: 750.0 Quantidade de Ítens 3
-2012-05-20 23:00:01,434 INFO  br.com.fiap.view.RegistroPedidos - LogVendasDiarias.aj:24 - Pedido: 11 Total do Pedido: 220.0 Quantidade de Ítens 11
-2012-05-20 23:10:09,069 INFO  br.com.fiap.view.RegistroPedidos - LogVendasDiarias.aj:24 - Pedido: 12 Total do Pedido: 110.0 Quantidade de Ítens 11
-2012-05-20 23:58:42,872 INFO  br.com.fiap.view.RegistroPedidos - LogVendasDiarias.aj:24 - Pedido: 13 Total do Pedido: 30.0 Quantidade de Ítens 3
