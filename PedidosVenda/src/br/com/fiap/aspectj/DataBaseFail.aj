@@ -1,7 +1,7 @@
 package br.com.fiap.aspectj;
 
 import br.com.fiap.dao.VendaDao;
-import br.com.fiap.view.TestException;
+import br.com.fiap.pool.TestException;
 
 import java.net.ConnectException;
 import org.apache.log4j.Logger;

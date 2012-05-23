@@ -15,8 +15,7 @@ public aspect VendasTraceAspecto {
 		
 	private int _callDepth = -1;
 
-	//pointcut tracePoints() : ! within ( VendasTraceAspecto ) ;
-	pointcut tracePoints() :  within ( VendasTraceAspecto ) ;
+	pointcut tracePoints() : ! within ( VendasTraceAspecto ) ;	
 
 	before() : tracePoints()
 {

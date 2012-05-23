@@ -3,7 +3,7 @@ package br.com.fiap.pool;
 import java.sql.*;
 
 
-public class Test {
+public class TestConnectionPool {
 
 	public static void main(String[] args) throws Exception {
 
