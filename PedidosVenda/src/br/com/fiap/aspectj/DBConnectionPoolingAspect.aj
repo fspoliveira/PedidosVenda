@@ -1,9 +1,13 @@
 package br.com.fiap.aspectj;
+
 import java.sql.*;
 
 import br.com.fiap.pool.DBConnectionPool;
 import br.com.fiap.pool.SimpleDBConnectionPool;
 
+/*4. Desenvolver um 'connection pooling' através do uso de
+ Aspectos
+ */
 
 public aspect DBConnectionPoolingAspect {
 
@@ -36,5 +40,4 @@ public aspect DBConnectionPoolingAspect {
 			proceed(connection);
 		}
 	}
-
 }
